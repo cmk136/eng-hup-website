@@ -4,39 +4,53 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Eng Hup Builders Pte. Ltd.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Floating Background Elements -->
-  <div class="floating-elements">
-    <div class="floating-circle"></div>
-    <div class="floating-circle"></div>
-    <div class="floating-circle"></div>
-  </div>
-
   <header>
     <nav class="navbar">
       <div class="nav-container">
-        <div class="logo">Eng Hup Builders</div>
-        <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
+        <div class="nav-left">
+          <div class="logo">ENG HUP BUILDERS</div>
+        </div>
+        <div class="nav-center">
+          <ul class="nav-links">
+            <li><a href="#about" data-text="About">About</a></li>
+            <li><a href="#services" data-text="Services">Services</a></li>
+            <li><a href="#portfolio" data-text="Portfolio">Portfolio</a></li>
+            <li><a href="#contact" data-text="Contact">Contact</a></li>
+          </ul>
+        </div>
       </div>
     </nav>
   </header>
 
   <section class="hero">
-    <div class="hero-text">
-      <h1>Transforming Spaces with<br>Precision and Purpose</h1>
-      <p>Professional renovation and construction specialists delivering<br>excellence across Singapore since 2005</p>
-      <a href="#contact" class="cta-button">Start Your Project</a>
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-category">/ CONSTRUCTION</div>
+        <h1>SPACE<br>DESIGN<br>STUDIO</h1>
+        <p>We specialize in residential, commercial,<br>and industrial construction services.</p>
+        <a href="#about" class="cta-button">Read more</a>
+      </div>
     </div>
   </section>
 
-  <section class="stats">
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-content">
+        <div class="about-text">
+          <h2>ABOUT US</h2>
+          <p>Eng Hup Builders is a Singapore-based construction and renovation service specializing in residential, commercial, and industrial spaces. Driven by a profound commitment to excellence, our mission is to meticulously transform spaces that resonate with your unique vision and requirements.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- <section class="stats">
     <div class="container">
       <div class="stats-grid">
         <div class="stat-box">
@@ -53,74 +67,53 @@
         </div>
       </div>
     </div>
-  </section>
-
-  <section class="about" id="about">
-    <div class="container">
-      <div class="about-content">
-        <div class="about-text">
-          <h2>About Eng Hup Builders</h2>
-          <p>With over 18 years of experience in the construction and renovation industry, Eng Hup Builders has established itself as a trusted partner for residential, commercial, and industrial projects across Singapore.</p>
-          <p>Our commitment to precision, quality craftsmanship, and client satisfaction drives every project we undertake. From concept to completion, we deliver exceptional results that transform spaces and exceed expectations.</p>
-        </div>
-        <div class="about-features">
-          <div class="feature">
-            <h4>Quality Assurance</h4>
-            <p>Rigorous quality control at every stage of construction</p>
-          </div>
-          <div class="feature">
-            <h4>Licensed Professionals</h4>
-            <p>Certified team with proper accreditations and safety credentials</p>
-          </div>
-          <div class="feature">
-            <h4>Timely Delivery</h4>
-            <p>Project management excellence ensuring on-time completion</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  </section> -->
 
   <section class="services" id="services">
     <div class="container">
       <h2>Our Services</h2>
-      <div class="services-grid">
-        <div class="service-item">
-          <h3>Interior Design</h3>
-          <p>Complete interior design solutions tailored to your vision and functional requirements.</p>
+      <div class="slider-container">
+        <div class="slider-wrapper" id="slider-wrapper">
+          <div class="slider-track" id="slider-track">
+            <div class="service-slide">
+              <h3>Interior Design</h3>
+              <p>Complete interior design solutions tailored to your vision.</p>
+            </div>
+            <div class="service-slide">
+              <h3>M&E Works</h3>
+              <p>Mechanical and electrical installations with certified professionals.</p>
+            </div>
+            <div class="service-slide">
+              <h3>Carpentry</h3>
+              <p>Custom carpentry work including built-in furniture.</p>
+            </div>
+            <div class="service-slide">
+              <h3>Glazing & Installations</h3>
+              <p>Professional glazing services for commercial and residential projects.</p>
+            </div>
+            <div class="service-slide">
+              <h3>Electrical Work</h3>
+              <p>Comprehensive electrical services from wiring to automation.</p>
+            </div>
+            <div class="service-slide">
+              <h3>Renovation</h3>
+              <p>Complete renovation services with attention to detail.</p>
+            </div>
+            <div class="service-slide">
+              <h3>Addition & Alteration</h3>
+              <p>Structural modifications to maximize your space potential.</p>
+            </div>
+            <div class="service-slide">
+              <h3>Customization</h3>
+              <p>Bespoke solutions for your unique requirements.</p>
+            </div>
+            <div class="service-slide">
+              <h3>Retrofitting & Refurbishment</h3>
+              <p>Upgrading structures with modern systems and finishes.</p>
+            </div>
+          </div>
         </div>
-        <div class="service-item">
-          <h3>M&E Works</h3>
-          <p>Mechanical and electrical installations with certified professionals and quality assurance.</p>
-        </div>
-        <div class="service-item">
-          <h3>Carpentry</h3>
-          <p>Custom carpentry work including built-in furniture and architectural woodwork.</p>
-        </div>
-        <div class="service-item">
-          <h3>Glazing & Installations</h3>
-          <p>Professional glazing services and precision installations for commercial and residential projects.</p>
-        </div>
-        <div class="service-item">
-          <h3>Electrical Work</h3>
-          <p>Comprehensive electrical services from wiring to smart home automation systems.</p>
-        </div>
-        <div class="service-item">
-          <h3>Renovation</h3>
-          <p>Complete renovation services transforming spaces with attention to detail and quality.</p>
-        </div>
-        <div class="service-item">
-          <h3>Addition & Alteration</h3>
-          <p>Structural modifications and extensions to maximize your space potential.</p>
-        </div>
-        <div class="service-item">
-          <h3>Customization</h3>
-          <p>Bespoke solutions designed specifically for your unique requirements and preferences.</p>
-        </div>
-        <div class="service-item">
-          <h3>Retrofitting & Refurbishment</h3>
-          <p>Upgrading existing structures with modern systems and contemporary finishes.</p>
-        </div>
+        <div class="slider-dots" id="slider-dots"></div>
       </div>
     </div>
   </section>
@@ -226,13 +219,6 @@
     </div>
   </footer>
 
-  <!-- Scroll to Top Button -->
-  <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 19V5M5 12L12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </button>
-
-  <script src="scripts/index.js"></script>
+  <script src="scripts/main.js"></script>
 </body>
 </html>

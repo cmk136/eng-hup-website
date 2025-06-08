@@ -1,26 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
     
-    // Scroll to Top Button functionality
-    const scrollToTopBtn = document.getElementById('scrollToTop');
-    
-    // Debug: Check if button exists
-    if (scrollToTopBtn) {
-        console.log('Scroll to top button found');
-    } else {
-        console.error('Scroll to top button not found');
-    }
-    
-    // Scroll to top when button is clicked
-    if (scrollToTopBtn) {
-        scrollToTopBtn.addEventListener('click', function() {
-            console.log('Scroll to top clicked');
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    }
-    
     // Smooth scrolling for navigation links
     const allNavLinks = document.querySelectorAll('a[href^="#"]');
     allNavLinks.forEach(link => {
@@ -38,6 +17,213 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Touch/Drag Slider functionality
+    const sliderWrapper = document.getElementById('slider-wrapper');
+    const sliderTrack = document.getElementById('slider-track');
+    const dotsContainer = document.getElementById('slider-dots');
+    const slides = document.querySelectorAll('.service-slide');
+    console.log('Number of slides found:', slides.length); // ADD THIS
+
+
+    let currentSlide = 0;
+    let slidesToShow = getSlidesToShow();
+    let totalSlides = slides.length;
+    let isDragging = false;
+    let startPos = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+    let slideWidth = getSlideWidth(); 
+
+    function getSlidesToShow() {
+        if (window.innerWidth <= 480) return 1;
+        if (window.innerWidth <= 768) return 2;
+        if (window.innerWidth <= 1024) return 3;
+        return 4;
+    }
+    
+    function getSlideWidth() {
+        const slide = document.querySelector('.service-slide');
+        if (slide) {
+            const sliderTrack = document.getElementById('slider-track');
+            const computedStyle = window.getComputedStyle(sliderTrack);
+            const gap = parseFloat(computedStyle.gap) || 24;
+            return slide.offsetWidth + gap;
+        }
+        return 304; // fallback
+    }
+
+    function createDots() {
+        if (!dotsContainer) return;
+        dotsContainer.innerHTML = '';
+        const maxSlides = Math.max(1, totalSlides - slidesToShow + 1);
+        
+        for (let i = 0; i < maxSlides; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'slider-dot';
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        }
+    }
+
+    function updateSlider() {
+        if (!sliderTrack) return;
+        slideWidth = getSlideWidth(); // ADD THIS LINE
+        const offset = -currentSlide * slideWidth;
+        sliderTrack.style.transform = `translateX(${offset}px)`;
+        
+        // Update dots
+        const dots = document.querySelectorAll('.slider-dot');
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+        });
+    }
+
+    function goToSlide(slideIndex) {
+        const maxSlide = totalSlides - slidesToShow;
+        currentSlide = Math.max(0, Math.min(slideIndex, maxSlide));
+        setPositionByIndex();
+        updateSlider();
+    }
+
+    function nextSlide() {
+        if (currentSlide < totalSlides - slidesToShow) {
+            currentSlide++;
+        } else {
+            currentSlide = 0;
+        }
+        setPositionByIndex();
+        updateSlider();
+    }
+
+    function setPositionByIndex() {
+        slideWidth = getSlideWidth();
+        currentTranslate = currentSlide * -slideWidth;
+        prevTranslate = currentTranslate;
+        if (sliderTrack) {
+            sliderTrack.style.transform = `translateX(${currentTranslate}px)`;
+        }
+    }
+
+    // Touch/Mouse events
+    function getPositionX(event) {
+        return event.type.includes('mouse') ? event.clientX : event.touches[0].clientX;
+    }
+
+    function dragStart(event) {
+        console.log('Drag started'); // ADD THIS
+        startPos = getPositionX(event);
+        isDragging = true;
+        
+        // Disable transitions during drag
+        if (sliderTrack) {
+            sliderTrack.style.transition = 'none';
+            sliderTrack.classList.add('dragging');
+        }
+        
+        // Prevent default behavior
+        if (event.type === 'mousedown') {
+            event.preventDefault();
+        }
+    }
+
+    function dragMove(event) {
+        if (!isDragging) return;
+        
+        event.preventDefault();
+        const currentPosition = getPositionX(event);
+        const diff = currentPosition - startPos;
+        currentTranslate = prevTranslate + diff;
+        
+        // ADD THESE BOUNDS CHECKS
+        const maxTranslate = 0;
+        const minTranslate = -(totalSlides - slidesToShow) * slideWidth;
+        currentTranslate = Math.max(minTranslate, Math.min(maxTranslate, currentTranslate));
+        
+        // Apply the transform
+        if (sliderTrack) {
+            sliderTrack.style.transform = `translateX(${currentTranslate}px)`;
+        }
+    }
+
+    function dragEnd() {
+        if (!isDragging) return;
+        
+        isDragging = false;
+        slideWidth = getSlideWidth();
+        
+        // Re-enable transitions
+        if (sliderTrack) {
+            sliderTrack.style.transition = 'transform 0.3s ease';
+            sliderTrack.classList.remove('dragging');
+        }
+        
+        const movedBy = currentTranslate - prevTranslate;
+        
+        // Determine if we should slide to next/prev
+        if (movedBy < -100 && currentSlide < totalSlides - slidesToShow) {
+            currentSlide++;
+        } else if (movedBy > 100 && currentSlide > 0) {
+            currentSlide--;
+        }
+        
+        // Reset to current slide position
+        setPositionByIndex();
+        updateSlider();
+    }
+
+    // Event listeners
+    if (sliderWrapper) {
+        // Mouse events
+        sliderWrapper.addEventListener('mousedown', dragStart);
+        document.addEventListener('mousemove', dragMove);
+        document.addEventListener('mouseup', dragEnd);
+        
+        // Touch events
+        sliderWrapper.addEventListener('touchstart', dragStart, { passive: false });
+        document.addEventListener('touchmove', dragMove, { passive: false });
+        document.addEventListener('touchend', dragEnd);
+        
+        // Prevent context menu
+        sliderWrapper.addEventListener('contextmenu', (e) => e.preventDefault());
+    }
+
+    // Auto-play slider
+    let autoSlide = setInterval(nextSlide, 4000);
+
+    // Pause on hover/touch
+    if (sliderWrapper) {
+        sliderWrapper.addEventListener('mouseenter', () => {
+            clearInterval(autoSlide);
+        });
+        
+        sliderWrapper.addEventListener('mouseleave', () => {
+            if (!isDragging) {
+                autoSlide = setInterval(nextSlide, 4000);
+            }
+        });
+    }
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        slidesToShow = getSlidesToShow();
+        slideWidth = getSlideWidth();
+        currentSlide = 0;
+        createDots();
+        setPositionByIndex();
+        updateSlider();
+    });
+
+    // Initialize slider
+    if (slides.length > 0) {
+        setTimeout(() => {
+            slideWidth = getSlideWidth();
+            createDots();
+            setPositionByIndex();
+            updateSlider();
+        }, 100); // Add small delay
+    }
     
     // Form submission handler
     const contactForm = document.querySelector('.contact-form form');
@@ -124,8 +310,7 @@ document.addEventListener('DOMContentLoaded', function() {
         counterObserver.observe(counter);
     });
     
-    // Navbar scroll effect and scroll to top button
-    let lastScrollTop = 0;
+    // Navbar scroll effect
     const navbar = document.querySelector('.navbar');
     
     window.addEventListener('scroll', function() {
@@ -137,52 +322,29 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             navbar.classList.remove('scrolled');
         }
-        
-        // Scroll to top button visibility
-        if (scrollTop > 300) {
-            scrollToTopBtn.classList.add('show');
-        } else {
-            scrollToTopBtn.classList.remove('show');
-        }
-        
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     });
     
     // Service item hover effects
-    const serviceItems = document.querySelectorAll('.service-item');
+    const serviceItems = document.querySelectorAll('.service-slide');
     serviceItems.forEach(item => {
         item.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-10px) scale(1.02)';
+            this.style.transform = 'translateY(-5px)';
         });
         
         item.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
+            this.style.transform = 'translateY(0)';
         });
-    });
-    
-    // Loading animation for page
-    window.addEventListener('load', function() {
-        document.body.classList.add('loaded');
-        
-        // Trigger hero animation
-        const heroText = document.querySelector('.hero-text');
-        if (heroText) {
-            heroText.style.opacity = '1';
-            heroText.style.transform = 'translateY(0)';
-        }
     });
     
     // Form field validation and styling
     const formFields = document.querySelectorAll('.contact-form input, .contact-form select, .contact-form textarea');
     formFields.forEach(field => {
         field.addEventListener('focus', function() {
-            this.style.borderColor = '#1a1a1a';
-            this.style.boxShadow = '0 0 0 3px rgba(26, 26, 26, 0.1)';
+            this.style.borderColor = '#FFD93D';
         });
         
         field.addEventListener('blur', function() {
             this.style.borderColor = '#e9ecef';
-            this.style.boxShadow = 'none';
             
             // Validation
             if (this.hasAttribute('required') && !this.value.trim()) {
@@ -202,17 +364,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const style = document.createElement('style');
     style.textContent = `
         .navbar.scrolled {
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-        
-        body.loaded .hero-text {
-            transition: all 1s ease;
-        }
-        
-        .service-item {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(25px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
         }
     `;
     document.head.appendChild(style);
