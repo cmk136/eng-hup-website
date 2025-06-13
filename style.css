@@ -65,26 +65,47 @@ p {
 
 /* Modern Navigation */
 .navbar {
-  background-color: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background-color: #ffffff;
   position: fixed;
-  top: 0;
-  width: 100%;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px);
+  max-width: 1200px;
   z-index: 1000;
   padding: 0;
-  transition: all 0.3s ease;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  animation: floatIn 1s ease-out;
+}
+
+@keyframes floatIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.navbar.scrolled {
+  background-color: #ffffff;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 217, 61, 0.3);
 }
 
 .nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1400px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 0 3rem;
-  height: 70px;
+  padding: 0.8rem 2rem;
+  height: 60px;
 }
 
 .nav-left,
@@ -116,16 +137,40 @@ p {
 }
 
 .nav-links a {
-  color: #999;
+  color: #666;
   text-decoration: none;
   font-weight: 400;
   font-size: 0.95rem;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: 'Montserrat', sans-serif;
+  position: relative;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+}
+
+.nav-links a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 217, 61, 0.2), rgba(255, 193, 7, 0.2));
+  border-radius: 25px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
+
+.nav-links a:hover::before {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .nav-links a:hover {
   color: #1a1a1a;
+  transform: translateY(-2px);
 }
 
 /* Icon Buttons */
@@ -185,17 +230,17 @@ p {
 
 .hero-text {
   max-width: 600px;
-  color: #1a1a1a;
+  color: #ffffff;
 }
 
 .hero-category {
   font-size: 0.9rem;
   color: #ffffff;
-  font-weight: 400;
-  letter-spacing: 2px;
-  margin-bottom: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.3em; 
+  margin-bottom: 1rem;
   text-transform: uppercase;
-  font-family: 'Montserrat', sans-serif;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
 }
 
 .hero-text h1 {
@@ -204,18 +249,19 @@ p {
   color: #ffffff;
   line-height: 0.9;
   margin-bottom: 2rem;
-  letter-spacing: -0.03em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   font-family: 'Montserrat', sans-serif;
 }
 
 .hero-text p {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: #ffffff;
-  line-height: 1.6;
-  margin-bottom: 3rem;
-  font-weight: 400;
-  font-family: 'Montserrat', sans-serif;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.05em; /* Add this for subtle spacing */
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.3);
 }
 
 .cta-button {
@@ -318,12 +364,14 @@ p {
 /* Services Section - Drag Slider */
 .services {
   padding: 6rem 0;
-  background: white;
+  background: linear-gradient(135deg, #FFD93D 0%, #ff9500 100%);
+  position: relative;
 }
 
 .services h2 {
-  color: #1a1a1a;
-  margin-bottom: 3rem;
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
 }
 
 .slider-container {
@@ -649,8 +697,15 @@ footer p {
     padding: 0 1rem;
   }
 
+  .navbar {
+    top: 10px;
+    width: calc(100% - 20px);
+    border-radius: 25px;
+  }
+
   .nav-container {
-    padding: 0 1.5rem;
+    padding: 0.6rem 1.5rem;
+    height: 55px;
   }
 
   .nav-center {
@@ -668,7 +723,14 @@ footer p {
   }
 
   .hero-text h1 {
-    font-size: 3rem;
+    font-size: 4rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    letter-spacing: 0.2em; /* Add this for wide spacing */
+    text-transform: uppercase;
+    text-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
   }
 
   .hero-text p {
@@ -710,8 +772,40 @@ footer p {
   }
 
   .service-item {
-    margin: 0;
-    padding: 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #1a1a1a, #333);
+  }
+
+  .service-item::after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #FFD93D, #FFC107);
+    border-radius: 50%;
+    opacity: 0.1;
+    transition: all 0.3s ease;
   }
 }
 
