@@ -21,6 +21,7 @@
             <li><a href="#about" data-text="About">About</a></li>
             <li><a href="#services" data-text="Services">Services</a></li>
             <li><a href="#portfolio" data-text="Portfolio">Portfolio</a></li>
+            <li><a href="#certifications" data-text="Certifications">Certifications</a></li>
             <li><a href="#contact" data-text="Contact">Contact</a></li>
           </ul>
         </div>
@@ -49,25 +50,6 @@
       </div>
     </div>
   </section>
-
-  <!-- <section class="stats">
-    <div class="container">
-      <div class="stats-grid">
-        <div class="stat-box">
-          <strong>500+</strong>
-          <span>Projects Completed</span>
-        </div>
-        <div class="stat-box">
-          <strong>95%</strong>
-          <span>Client Satisfaction</span>
-        </div>
-        <div class="stat-box">
-          <strong>18</strong>
-          <span>Years of Experience</span>
-        </div>
-      </div>
-    </div>
-  </section> -->
 
   <section class="services" id="services">
     <div class="container">
@@ -120,53 +102,306 @@
 
   <section class="portfolio" id="portfolio">
     <div class="container">
-      <h2>Our Portfolio</h2>
-      <div class="portfolio-grid">
-        <div class="portfolio-item">
-          <div class="portfolio-image">
-            <div class="portfolio-placeholder">Residential Project</div>
-          </div>
-          <div class="portfolio-content">
-            <h3>Modern Residential Renovation</h3>
-            <p>Complete home transformation featuring contemporary design and smart home integration.</p>
-            <div class="portfolio-tags">
-              <span>Renovation</span>
-              <span>Interior Design</span>
-              <span>M&E Works</span>
-            </div>
-          </div>
-        </div>
-        <div class="portfolio-item">
-          <div class="portfolio-image">
-            <div class="portfolio-placeholder">Commercial Project</div>
-          </div>
-          <div class="portfolio-content">
-            <h3>Office Space Refurbishment</h3>
-            <p>Professional workspace design with modern amenities and efficient layout optimization.</p>
-            <div class="portfolio-tags">
-              <span>Refurbishment</span>
-              <span>Electrical Work</span>
-              <span>Carpentry</span>
-            </div>
-          </div>
-        </div>
-        <div class="portfolio-item">
-          <div class="portfolio-image">
-            <div class="portfolio-placeholder">Industrial Project</div>
-          </div>
-          <div class="portfolio-content">
-            <h3>Industrial Facility Upgrade</h3>
-            <p>Large-scale industrial renovation with advanced mechanical and electrical systems.</p>
-            <div class="portfolio-tags">
-              <span>Addition & Alteration</span>
-              <span>Glazing</span>
-              <span>Customization</span>
-            </div>
-          </div>
-        </div>
+      <!-- Portfolio Header -->
+      <div class="portfolio-header">
+        <h2>Our Portfolio</h2>
+        <p class="portfolio-subtitle">Showcasing our expertise across residential, commercial, and industrial projects with a commitment to quality craftsmanship and innovative design solutions.</p>
       </div>
+
+      <!-- Portfolio Filter -->
+      <div class="portfolio-filters">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="residential">Residential</button>
+        <button class="filter-btn" data-filter="commercial">Commercial</button>
+        <button class="filter-btn" data-filter="industrial">Industrial</button>
+      </div>
+
+      <!-- Portfolio Grid -->
+      <div class="portfolio-grid">
+        
+        <!-- Project 1 -->
+        <div class="portfolio-item" data-category="commercial">
+          <div class="portfolio-image-gallery">
+            <div class="main-image">
+              <img src="/eng-hup-website/images/uniqlo-store-fitout-2.jpg" 
+                  alt="UNIQLO retail store fitout with modern fixtures and lighting in Singapore shopping mall" 
+                  loading="lazy" 
+                  class="gallery-main-img" />
+            </div>
+            <div class="image-thumbnails">
+              <img src="/eng-hup-website/images/uniqlo-store-fitout-2.jpg" 
+                  alt="UNIQLO store overview" 
+                  class="thumbnail active"
+                  data-main="/eng-hup-website/images/uniqlo-store-fitout-2.jpg" />
+              <img src="/eng-hup-website/images/uniqlo-store-fitout-1.jpg" 
+                  alt="UNIQLO store interior layout" 
+                  class="thumbnail"
+                  data-main="/eng-hup-website/images/uniqlo-store-fitout-1.jpg" />
+              <img src="/eng-hup-website/images/uniqlo-store-fitout-3.jpg" 
+                  alt="UNIQLO store entrance and storefront" 
+                  class="thumbnail"
+                  data-main="/eng-hup-website/images/uniqlo-store-fitout-3.jpg" />
+            </div>
+          </div>
+          <div class="portfolio-content">
+            <div class="project-meta">
+              <span class="project-type">Commercial</span>
+              <span class="project-year">2025</span>
+            </div>
+            <h3>UNIQLO Store Fitout</h3>
+            <p>Complete retail store renovation featuring modern fixtures, strategic lighting design, and optimized customer flow layout for enhanced shopping experience.</p>
+            <div class="project-location">Shopping Mall, Singapore</div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="portfolio-item" data-category="commercial">
+          <div class="portfolio-image-gallery">
+            <div class="main-image">
+              <img src="/eng-hup-website/images/RWS.png" 
+                  alt="Luxury restroom renovation at Resort World Sentosa Casino with premium fixtures and modern design"
+                  loading="lazy" 
+                  class="gallery-main-img" />
+            </div>
+            <div class="image-thumbnails">
+              <img src="/eng-hup-website/images/RWS.png" 
+                  alt="Luxury restroom renovation at Resort World Sentosa Casino with premium fixtures and modern design" 
+                  class="thumbnail active"
+                  data-main="/eng-hup-website/images/RWS.png" />
+              <img src="/eng-hup-website/images/RWS1.png" 
+                  alt="Luxury restroom renovation at Resort World Sentosa Casino with premium fixtures and modern design" 
+                  class="thumbnail"
+                  data-main="/eng-hup-website/images/RWS1.png" />
+            </div>
+          </div>
+          <div class="portfolio-content">
+            <div class="project-meta">
+              <span class="project-type">Commercial</span>
+              <span class="project-year">2024</span>
+            </div>
+            <h3>RWS Casino Restroom Renovation</h3>
+            <p>Luxury restroom renovation featuring premium fixtures, sophisticated lighting, and high-end finishes for enhanced guest experience at Singapore's premier gaming destination.</p>
+            <div class="project-location">Resorts World Sentosa, Singapore</div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="portfolio-item" data-category="commercial">
+          <div class="portfolio-image-gallery">
+            <div class="main-image">
+              <img src="/eng-hup-website/images/9StoryBuilding2.png" 
+                  alt="Modern corporate office renovation with contemporary furnishings and open floor plan" 
+                  loading="lazy" 
+                  class="gallery-main-img" />
+            </div>
+            <div class="image-thumbnails">
+              <img src="/eng-hup-website/images/9StoryBuilding2.png" 
+                  alt="Office lounge area with curved sofa and panoramic windows" 
+                  class="thumbnail active"
+                  data-main="/eng-hup-website/images/9StoryBuilding2.png" />
+              <img src="/eng-hup-website/images/9StoryBuilding1.png" 
+                  alt="Open office space with modern pantry and collaborative areas" 
+                  class="thumbnail"
+                  data-main="/eng-hup-website/images/9StoryBuilding1.png" />
+            </div>
+          </div>
+          <div class="portfolio-content">
+            <div class="project-meta">
+              <span class="project-type">Commercial</span>
+              <span class="project-year">2024</span>
+            </div>
+            <h3>Corporate Office Renovation</h3>
+            <p>Complete office renovation featuring modern open-plan layout, contemporary furnishings, and collaborative spaces designed for enhanced productivity and employee comfort.</p>
+            <div class="project-location">CBD District, Singapore</div>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="portfolio-item" data-category="commercial">
+          <div class="portfolio-image-gallery">
+            <div class="main-image">
+              <img src="/eng-hup-website/images/le-restaurant-2.JPG" 
+                  alt="LE Restaurant and Asian Tapas Bar elegant dining room with Buddha statue and sophisticated lighting design" 
+                  loading="lazy" 
+                  class="gallery-main-img" />
+            </div>
+            <div class="image-thumbnails">
+              <img src="/eng-hup-website/images/le-restaurant-2.JPG" 
+                  alt="LE Restaurant main dining area with traditional Asian decor" 
+                  class="thumbnail active"
+                  data-main="/eng-hup-website/images/le-restaurant-2.JPG" />
+              <img src="/eng-hup-website/images/le-restaurant-1.JPG" 
+                  alt="LE Restaurant custom ceiling design and ambient lighting systems" 
+                  class="thumbnail"
+                  data-main="/eng-hup-website/images/le-restaurant-1.JPG" />
+            </div>
+          </div>
+          <div class="portfolio-content">
+            <div class="project-meta">
+              <span class="project-type">Commercial</span>
+              <span class="project-year">2024</span>
+            </div>
+            <h3>LE Restaurant and Asian Tapas Bar</h3>
+            <p>Premium restaurant renovation featuring modern Chinese fine dining atmosphere with custom lighting, traditional Asian design elements, and sophisticated pre-dinner bar concept.</p>
+            <div class="project-location">Suntec City, Singapore</div>
+          </div>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="portfolio-item" data-category="industrial">
+          <div class="portfolio-image-gallery">
+            <div class="main-image">
+              <img src="/eng-hup-website/images/ntu-glazing-1.JPG" 
+                  alt="NTU Singapore glazing installation featuring modern glass facade and structural framework" 
+                  loading="lazy" 
+                  class="gallery-main-img" />
+            </div>
+            <div class="image-thumbnails">
+              <img src="/eng-hup-website/images/ntu-glazing-1.JPG" 
+                  alt="NTU building exterior glazing with modern glass panels" 
+                  class="thumbnail active"
+                  data-main="/eng-hup-website/images/ntu-glazing-1.JPG" />
+              <img src="/eng-hup-website/images/ntu-glazing-2.JPG" 
+                  alt="NTU interior glazing structure and steel framework" 
+                  class="thumbnail"
+                  data-main="/eng-hup-website/images/ntu-glazing-2.JPG" />
+            </div>
+          </div>
+          <div class="portfolio-content">
+            <div class="project-meta">
+              <span class="project-type">Industrial</span>
+              <span class="project-year">2024</span>
+            </div>
+            <h3>NTU Singapore Glazing Installation</h3>
+            <p>Large-scale glazing installation featuring modern glass panel systems, structural glazing, and precision installation for Singapore's premier technological university.</p>
+            <div class="project-location">Nanyang Technological University, Singapore</div>
+          </div>
+        </div>
+
+        <!-- Project 6 -->
+        <div class="portfolio-item" data-category="commercial">
+          <div class="portfolio-image-gallery">
+            <div class="main-image">
+              <img src="/eng-hup-website/images/np_munch2.png" 
+                  alt="Munch food court renovation at Ngee Ann Polytechnic featuring modern food service equipment and vibrant design" 
+                  loading="lazy" 
+                  class="gallery-main-img" />
+            </div>
+            <div class="image-thumbnails">
+              <img src="/eng-hup-website/images/np_munch2.png" 
+                  alt="Munch food court central food station with curved ceiling design" 
+                  class="thumbnail active"
+                  data-main="/eng-hup-website/images/np_munch2.png" />
+              <img src="/eng-hup-website/images/np_munch1.png" 
+                  alt="Munch food court service counters with red accent design" 
+                  class="thumbnail"
+                  data-main="/eng-hup-website/images/np_munch1.png" />
+            </div>
+          </div>
+          <div class="portfolio-content">
+            <div class="project-meta">
+              <span class="project-type">Commercial</span>
+              <span class="project-year">2024</span>
+            </div>
+            <h3>Munch Food Court - Ngee Ann Polytechnic</h3>
+            <p>Complete food court renovation featuring modern food service equipment, vibrant interior design, and efficient layout optimization for Singapore's leading polytechnic institution.</p>
+            <div class="project-location">Ngee Ann Polytechnic, Singapore</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Simple CTA -->
+      <div class="portfolio-cta">
+        <h3>Ready to start your project?</h3>
+        <a href="#contact" class="cta-button">Get Free Consultation</a>
+      </div>
+
     </div>
   </section>
+
+  <!-- Certifications Section -->
+  <section class="certifications" id="certifications">
+      <div class="container">
+        <div class="certifications-header">
+          <h2>Our Certifications & Accreditations</h2>
+          <p>We maintain the highest industry standards through rigorous certifications in quality management, environmental responsibility, and workplace safety.</p>
+        </div>
+        
+        <div class="certifications-grid">
+          <div class="certification-item">
+            <div class="cert-logo">
+              <img src="images/iso-9001.png" alt="ISO 9001 Quality Management Systems Certification" />
+            </div>
+            <div class="cert-info">
+              <h3>ISO 9001:2015</h3>
+              <p>Quality Management Systems</p>
+              <span class="cert-number">Cert No: KW_ISO_9001</span>
+            </div>
+          </div>
+
+          <div class="certification-item">
+            <div class="cert-logo">
+              <img src="images/KW_ISO_14001.png" alt="ISO 14001 Environmental Management Systems Certification" />
+            </div>
+            <div class="cert-info">
+              <h3>ISO 14001:2015</h3>
+              <p>Environmental Management Systems</p>
+              <span class="cert-number">Cert No: KW_ISO_14001</span>
+            </div>
+          </div>
+
+          <div class="certification-item">
+          <div class="cert-logo">
+            <img src="images/iso-45001.png" alt="ISO 45001 Health & Safety Management Systems Certification" />
+          </div>
+          <div class="cert-info">
+            <h3>ISO 45001:2018</h3>
+            <p>Health & Safety Management Systems</p>
+            <span class="cert-number">Cert No: KWO-1481</span>
+          </div>
+        </div>
+
+
+          <div class="certification-item">
+            <div class="cert-logo">
+              <img src="images/osh-certification.png" alt="SAC Occupational Safety & Health Certification OSH-2019-20" />
+            </div>
+            <div class="cert-info">
+              <h3>SAC Accredited</h3>
+              <p>Occupational Safety & Health</p>
+              <span class="cert-number">OSH-2019-20</span>
+            </div>
+          </div>
+
+          <div class="certification-item">
+            <div class="cert-logo">
+              <img src="images/quality-standards.png" alt="SAC Quality Standards Certification QS-2017-31" />
+            </div>
+            <div class="cert-info">
+              <h3>SAC Accredited</h3>
+              <p>Quality Standards Certification</p>
+              <span class="cert-number">QS-2017-31</span>
+            </div>
+          </div>
+
+          <div class="certification-item">
+            <div class="cert-logo">
+              <img src="images/bizsafe-star.png" alt="bizSAFE STAR Level Workplace Safety & Health Excellence" />
+            </div>
+            <div class="cert-info">
+              <h3>bizSAFE STAR</h3>
+              <p>Workplace Safety & Health Excellence</p>
+              <span class="cert-number">STAR Level Certification</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="certifications-cta">
+          <p>Our commitment to excellence is backed by internationally recognized standards and continuous improvement in quality, safety, and environmental responsibility.</p>
+        </div>
+      </div>
+    </section>
 
   <section class="contact" id="contact">
     <div class="container">
