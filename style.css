@@ -339,6 +339,79 @@ p {
   font-family: 'Montserrat', sans-serif;
 }
 
+/* Company History Styling */
+.company-history {
+  background: linear-gradient(135deg, rgba(255, 217, 61, 0.15), rgba(255, 193, 7, 0.1));
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  margin-top: 2.5rem;
+  border: 1px solid rgba(255, 217, 61, 0.4);
+  position: relative;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 20px rgba(255, 217, 61, 0.2);
+}
+
+.company-history::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #FFD93D, #FFC107);
+  border-radius: 2px;
+}
+
+.company-history p {
+  color: #1a1a1a;  /* Dark text for proper contrast */
+  font-weight: 600;
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  font-style: italic;
+}
+
+.stats {
+  padding: 5rem 0;
+  background: #fffbf0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  text-align: center;
+}
+
+.stat-box {
+  padding: 3rem 2rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.stat-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.stat-box strong {
+  display: block;
+  font-size: 3rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.stat-box span {
+  font-size: 1.1rem;
+  color: #1a1a1a;
+  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+}
+
 /* Services Section - Drag Slider */
 .services {
   padding: 6rem 0;
@@ -1083,6 +1156,15 @@ footer p {
   .cert-logo {
     width: 100px;
     height: 100px;
+  }
+
+  .company-history {
+    padding: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .company-history p {
+    font-size: 1rem;
   }
 }
 
