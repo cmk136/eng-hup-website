@@ -224,20 +224,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 100);
     }
     
-    // Form submission handler
-    // Form submission handler - Modified for Netlify
-    const contactForm = document.querySelector('.contact-form form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            // Don't prevent default - let Netlify handle the submission
-            
-            // Show success message after a short delay
-            setTimeout(() => {
-                alert('Thank you for your inquiry! We will get back to you soon.');
-            }, 100);
-        });
-    }
-    
     // Scroll animations for elements
     const observerOptions = {
         threshold: 0.1,
