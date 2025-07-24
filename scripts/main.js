@@ -225,23 +225,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Form submission handler
+    // Form submission handler - Modified for Netlify
     const contactForm = document.querySelector('.contact-form form');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+            // Don't prevent default - let Netlify handle the submission
             
-            // Get form data
-            const formData = new FormData(this);
-            const formObject = {};
-            formData.forEach((value, key) => {
-                formObject[key] = value;
-            });
-            
-            // Show success message
-            alert('Thank you for your inquiry! We will get back to you soon.');
-            
-            // Reset form
-            this.reset();
+            // Show success message after a short delay
+            setTimeout(() => {
+                alert('Thank you for your inquiry! We will get back to you soon.');
+            }, 100);
         });
     }
     
