@@ -84,11 +84,11 @@ p {
 @keyframes floatIn {
   0% {
     opacity: 0;
-    transform: translateX(-50%) translateY(-20px);
+    transform: translateX(-50%) translateY(-20px) translateZ(0);
   }
   100% {
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
+    transform: translateX(-50%) translateY(0) translateZ(0);
   }
 }
 
@@ -125,10 +125,28 @@ p {
   object-fit: contain;
 }
 
-@media (max-width: 768px) {
-  .nav-logo {
-    width: 35px;
-    height: 35px;
+.slider-dot.active {
+  background: #ffffff;
+  transform: scale(1.2);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.slider-dot:hover {
+  background: #ffffff;
+  opacity: 0.9;
+  transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .slider-container {
+    padding: 0 50px;
+  }
+  
+  .slider-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
   }
 }
 
@@ -220,13 +238,19 @@ p {
   background-image: url('images/stairs.jpg');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  background-attachment: scroll; /* Changed for mobile performance */
   min-height: 100vh;
   display: flex;
   align-items: center;
   padding: 2rem;
   padding-top: calc(2rem + 80px);
   position: relative;
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    background-attachment: fixed; /* Only use fixed on desktop */
+  }
 }
 
 .hero::before {
@@ -314,6 +338,37 @@ p {
   color: white;
 }
 
+/* About Section Logo Styling - Performance Optimized */
+.about-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  animation: logoFloat 6s ease-in-out infinite; /* Increased from 3s to 6s */
+}
+
+.about-logo img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(255, 217, 61, 0.4));
+  transition: transform 0.3s ease; /* Removed filter transition for performance */
+  will-change: transform; /* Hint browser for optimization */
+}
+
+.about-logo:hover img {
+  transform: scale(1.1) rotate(5deg) translateZ(0);
+}
+
+/* Optimized floating animation for the logo */
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0px) translateZ(0); /* Add translateZ for hardware acceleration */
+  }
+  50% {
+    transform: translateY(-8px) translateZ(0);
+  }
+}
+
 .about-content {
   position: relative;
   z-index: 2;
@@ -363,7 +418,7 @@ p {
 }
 
 .company-history p {
-  color: #1a1a1a;  /* Dark text for proper contrast */
+  color: #1a1a1a;
   font-weight: 600;
   margin: 0;
   font-size: 1.05rem;
@@ -412,7 +467,7 @@ p {
   font-family: 'Montserrat', sans-serif;
 }
 
-/* Services Section - Drag Slider */
+/* Services Section - Fixed Slider Layout */
 .services {
   padding: 6rem 0;
   background: linear-gradient(135deg, #FFD93D 0%, #ffb54e 100%);
@@ -423,11 +478,15 @@ p {
   position: relative;
   z-index: 2;
   color: #ffffff;
+  margin-bottom: 3rem; /* Add more space below title */
 }
 
 .slider-container {
   position: relative;
   max-width: 100%;
+  touch-action: pan-x;
+  padding: 0 60px; /* Add padding for arrows */
+  margin: 0 auto;
 }
 
 .slider-wrapper {
@@ -436,6 +495,7 @@ p {
   cursor: grab;
   user-select: none;
   pointer-events: auto;
+  position: relative;
 }
 
 .slider-wrapper:active {
@@ -448,71 +508,115 @@ p {
   gap: 1.5rem;
   will-change: transform;
   pointer-events: none;
+  width: fit-content;
+  transform: translateZ(0);
 }
 
 .slider-track.dragging {
   transition: none;
 }
 
+/* Ensure service slides are properly sized */
 .service-slide {
-  min-width: 220px;
-  background: #f8f9fa;
-  padding: 1.5rem;
-  border-radius: 10px;
-  border-left: 4px solid #FFD93D;
-  transition: all 0.3s ease;
+  min-width: 240px;
+  max-width: 240px;
+  background: #ffffff;
+  padding: 0;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
   flex-shrink: 0;
-  height: 180px;
+  height: 280px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .service-slide:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  background: white;
+  transform: translateY(-8px) translateZ(0);
 }
 
+/* Service Image Styling */
+.service-image {
+  width: 100%;
+  height: 140px;
+  overflow: hidden;
+  position: relative;
+}
+
+.service-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s ease;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.service-slide:hover .service-image img {
+  transform: scale(1.05) translateZ(0);
+}
+
+/* Service Content */
 .service-slide h3 {
   color: #1a1a1a;
-  margin-bottom: 1rem;
+  margin: 1rem 1.5rem 0.5rem 1.5rem;
   font-weight: 600;
   font-family: 'Montserrat', sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  line-height: 1.3;
 }
 
 .service-slide p {
-  font-size: 0.95rem;
-  line-height: 1.5;
+  font-size: 0.9rem;
+  line-height: 1.4;
   color: #666;
   font-family: 'Montserrat', sans-serif;
-  margin: 0;
+  margin: 0 1.5rem 1.5rem 1.5rem;
+  flex-grow: 1;
 }
 
-.slider-dots {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 2.5rem;
-}
-
-.slider-dot {
-  width: 10px;
-  height: 10px;
+/* Improved Navigation Arrows */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(255, 217, 61, 0.3);
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
-  background: #e9ecef;
+  font-size: 18px;
   cursor: pointer;
+  z-index: 15;
+  color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
+  font-weight: bold;
 }
 
-.slider-dot.active {
+.slider-prev {
+  left: 10px;
+}
+
+.slider-next {
+  right: 10px;
+}
+
+.slider-arrow:hover {
   background: #FFD93D;
-  transform: scale(1.3);
+  border-color: #FFD93D;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 20px rgba(255, 217, 61, 0.4);
 }
 
-.slider-dot:hover {
-  background: #FFC107;
+.slider-arrow:active {
+  transform: translateY(-50%) scale(0.95);
 }
 
 /* Portfolio Section */
@@ -589,20 +693,22 @@ p {
   margin-bottom: 4rem;
 }
 
-/* Portfolio Items */
+/* Portfolio Items - Optimized */
 .portfolio-item {
   background: #ffffff;
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid #f0f0f0;
-  transition: all 0.3s ease;
+  transition: transform 0.2s ease; /* Reduced transition time and removed box-shadow */
   cursor: pointer;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .portfolio-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px) translateZ(0);
   border-color: #FFD93D;
+  /* Removed box-shadow change for performance */
 }
 
 /* Portfolio Image Gallery */
@@ -623,11 +729,13 @@ p {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease; /* Reduced from 0.3s */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .portfolio-item:hover .gallery-main-img {
-  transform: scale(1.05);
+  transform: scale(1.05) translateZ(0);
 }
 
 .image-thumbnails {
@@ -671,11 +779,13 @@ p {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease; /* Reduced from 0.3s */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .portfolio-item:hover .portfolio-image img {
-  transform: scale(1.05);
+  transform: scale(1.05) translateZ(0);
 }
 
 /* Portfolio Content */
@@ -769,7 +879,7 @@ p {
   box-shadow: 0 8px 30px rgba(255, 217, 61, 0.4);
 }
 
-/* Filter Animation */
+/* Filter Animation - Optimized */
 .portfolio-item {
   animation: fadeIn 0.5s ease-out;
 }
@@ -777,11 +887,11 @@ p {
 @keyframes fadeIn {
   0% {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(10px) translateZ(0); /* Reduced from 20px */
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) translateZ(0);
   }
 }
 
@@ -792,7 +902,7 @@ p {
 /* Certifications Section */
 .certifications {
   padding: 6rem 0;
-  background: #FFD93D;
+  background: #ffffff;
 }
 
 .certifications-header {
@@ -821,70 +931,75 @@ p {
 }
 
 .certifications-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 2rem;
   margin-bottom: 3rem;
+  flex-wrap: wrap;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
+/* Optimized certification items */
 .certification-item {
-  background: #ffffff;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
-  transition: all 0.3s ease;
-  border: 1px solid #f0f0f0;
+  text-align: center;
+  transition: transform 0.2s ease; /* Reduced from 0.3s */
+  padding: 1rem;
+  border-radius: 8px;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .certification-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-  border-color: #FFD93D;
+  transform: translateY(-3px) translateZ(0); /* Reduced from -5px */
 }
 
 .cert-logo {
-  flex-shrink: 0;
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f8f9fa;
-  border-radius: 8px;
-  border: 2px solid #e9ecef;
+  margin-bottom: 0.75rem;
 }
 
 .cert-logo img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .cert-info {
-  flex: 1;
+  text-align: center;
 }
 
 .cert-info h3 {
   color: #1a1a1a;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
   font-family: 'Montserrat', sans-serif;
+  line-height: 1.3;
 }
 
 .cert-info p {
   color: #666;
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  margin-bottom: 0.25rem;
   font-family: 'Montserrat', sans-serif;
+  line-height: 1.2;
 }
 
 .cert-number {
   color: #999;
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   font-weight: 500;
   font-family: 'Montserrat', sans-serif;
 }
@@ -906,7 +1021,7 @@ p {
 /* Contact Section */
 .contact {
   padding: 6rem 0;
-  background: white;
+  background: linear-gradient(135deg, #FFD93D 0%, #ffb54e 100%); 
 }
 
 .contact-content {
@@ -918,12 +1033,13 @@ p {
 .contact-info h2 {
   text-align: left;
   margin-bottom: 1rem;
-  color: #1a1a1a;
+  color: #1a1a1a; 
   font-family: 'Montserrat', sans-serif;
 }
 
 .contact-info p {
   font-family: 'Montserrat', sans-serif;
+  color: #1a1a1a; 
 }
 
 .contact-details {
@@ -937,7 +1053,7 @@ p {
 }
 
 .contact-item strong {
-  color: #1a1a1a;
+  color: #1a1a1a; 
   font-size: 1rem;
   margin-bottom: 0.25rem;
   font-family: 'Montserrat', sans-serif;
@@ -945,16 +1061,17 @@ p {
 }
 
 .contact-item span {
-  color: #666;
+  color: #333; 
   font-size: 1.1rem;
   font-family: 'Montserrat', sans-serif;
 }
 
 /* Contact Form */
 .contact-form {
-  background: #f8f9fa;
+  background: #ffffff; 
   padding: 3rem;
   border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15); 
 }
 
 .form-group {
@@ -992,7 +1109,7 @@ p {
 
 .submit-btn {
   width: 100%;
-  background: #FFD93D;
+  background: #FFD93D; 
   color: #1a1a1a;
   padding: 1rem;
   border: none;
@@ -1048,10 +1165,61 @@ footer p {
     font-size: 1rem;
   }
 
+  .nav-logo {
+    width: 35px;
+    height: 35px;
+  }
+
+  /* Disable animations on mobile for better performance */
+  .about-logo {
+    animation: none;
+  }
+  
+  .service-slide:hover,
+  .portfolio-item:hover,
+  .certification-item:hover {
+    transform: none; /* Disable hover effects on mobile */
+  }
+  
+  .service-image img:hover,
+  .gallery-main-img:hover,
+  .portfolio-image img:hover {
+    transform: none;
+  }
+
+  .service-slide {
+    min-width: 220px;
+    max-width: 220px;
+    height: 260px;
+  }
+
+  .service-image {
+    height: 120px;
+  }
+  
+  .service-slide h3 {
+    font-size: 1rem;
+    margin: 0.8rem 1.2rem 0.4rem 1.2rem;
+  }
+  
+  .service-slide p {
+    font-size: 0.85rem;
+    margin: 0 1.2rem 1.2rem 1.2rem;
+  }
+
+  .about-logo img {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .about-logo {
+    margin-bottom: 1.5rem;
+  }
+
   .hero {
     padding: 2rem 1rem;
     padding-top: calc(2rem + 80px);
-    background-attachment: fixed;
+    background-attachment: scroll;
   }
 
   .hero-text h1 {
@@ -1094,10 +1262,14 @@ footer p {
     padding: 2rem;
   }
 
-  .service-slide {
-    min-width: 200px;
-    padding: 1.5rem;
+  .slider-arrow {
+    display: none;
   }
+  
+  .slider-container {
+    padding: 0 20px; /* Reduce padding on mobile */
+  }
+
 
   .portfolio {
     padding: 4rem 0;
@@ -1143,14 +1315,13 @@ footer p {
   }
 
   .certifications-grid {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     gap: 1.5rem;
+    padding: 1.5rem;
   }
 
   .certification-item {
-    flex-direction: column;
-    text-align: center;
-    padding: 1.5rem;
+    padding: 0.75rem;
   }
 
   .cert-logo {
@@ -1168,9 +1339,19 @@ footer p {
   }
 }
 
+
 @media (max-width: 480px) {
   .hero-text h1 {
     font-size: 2.5rem;
+  }
+
+  .about-logo img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .about-logo {
+    margin-bottom: 1rem;
   }
 
   .nav-container {
@@ -1185,17 +1366,28 @@ footer p {
     padding: 1.5rem;
   }
 
+  .slider-container {
+    padding: 0 10px;
+  }
+
   .service-slide {
-    min-width: 180px;
-    padding: 1.2rem;
+    min-width: 200px;
+    max-width: 200px;
+    height: 240px;
+  }
+  
+  .service-image {
+    height: 100px;
   }
   
   .service-slide h3 {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
+    margin: 0.6rem 1rem 0.3rem 1rem;
   }
   
   .service-slide p {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    margin: 0 1rem 1rem 1rem;
   }
 
   .portfolio-header {
@@ -1234,8 +1426,31 @@ footer p {
     margin-bottom: 3rem;
   }
 
+  .certifications-grid {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .certification-item {
+    padding: 0.5rem;
+  }
+
   .cert-logo {
     width: 80px;
     height: 80px;
+  }
+
+  .cert-info h3 {
+    font-size: 0.8rem;
+  }
+
+  .cert-info p {
+    font-size: 0.7rem;
+  }
+
+  .cert-number {
+    font-size: 0.65rem;
   }
 }
